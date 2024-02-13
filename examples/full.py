@@ -13,6 +13,7 @@ and figures.
 import os
 
 import numpy as np
+import matplotlib.pyplot as plt
 
 from pylatex import (
     Alignat,
@@ -86,5 +87,21 @@ if __name__ == "__main__":
             with doc.create(Figure(position="h!")) as kitten_pic:
                 kitten_pic.add_image(image_filename, width="120px")
                 kitten_pic.add_caption("Look it's on its back")
+
+        with doc.create(Subsection("A pyplot figure using the current figure")):
+            x = list(range(10))
+            y = [n**2 for n in x]
+            plt.plot(x, y)
+            with doc.create(Figure(position="h!")) as implicit_plt:
+                implicit_plt.add_plot()
+
+        with doc.create(Subsection("A pyplot figure using and explicit figure")):
+            x = list(range(10))
+            y = [n**3 for n in x]
+            fig, ax = plt.subplots()
+            ax.bar(x, y)
+            with doc.create(Figure(position="h!")) as implicit_plt:
+                implicit_plt.add_plot(figure=fig)
+
 
     doc.generate_pdf("full", clean_tex=False)
