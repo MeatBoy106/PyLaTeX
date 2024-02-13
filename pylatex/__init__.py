@@ -24,7 +24,17 @@ from .errors import TableRowSizeError
 from .figure import Figure, StandAloneGraphic, SubFigure
 from .frames import FBox, MdFramed
 from .headfoot import Foot, Head, PageStyle, simple_page_number
-from .labelref import Autoref, Eqref, Hyperref, Label, Marker, Pageref, Ref
+from .labelref import (
+    Autoref,
+    Eqref,
+    Hyperref,
+    Label,
+    Marker,
+    Pageref,
+    Ref,
+    Cref,
+    CrefUp,
+)
 from .lists import Description, Enumerate, Itemize
 from .math import Alignat, Math, Matrix, VectorName
 from .package import Package
