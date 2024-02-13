@@ -50,7 +50,7 @@ class Figure(Float):
             StandAloneGraphic(image_options=width, filename=fix_filename(filename))
         )
 
-    def _save_plot(self, *args, extension="pdf", **kwargs):
+    def _save_plot(self, *args, figure=None, extension="pdf", **kwargs):
         """Save the plot.
 
         Returns
@@ -64,10 +64,11 @@ class Figure(Float):
         filename = "{}.{}".format(str(uuid.uuid4()), extension.strip("."))
         filepath = posixpath.join(tmp_path, filename)
 
-        plt.savefig(filepath, *args, **kwargs)
+        saver = figure if figure else plt
+        saver.savefig(filepath, *args, **kwargs)
         return filepath
 
-    def add_plot(self, *args, extension="pdf", **kwargs):
+    def add_plot(self, *args, figure=None, extension="pdf", **kwargs):
         """Add the current Matplotlib plot to the figure.
 
         The plot that gets added is the one that would normally be shown when
@@ -92,7 +93,7 @@ class Figure(Float):
             if key in kwargs:
                 add_image_kwargs[key] = kwargs.pop(key)
 
-        filename = self._save_plot(*args, extension=extension, **kwargs)
+        filename = self._save_plot(*args, figure=figure, extension=extension, **kwargs)
 
         self.add_image(filename, **add_image_kwargs)
 
