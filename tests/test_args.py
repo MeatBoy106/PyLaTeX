@@ -210,7 +210,7 @@ def test_graphics():
     # Subfigure
     s = SubFigure(data=None, position=None, width=r"0.45\linewidth")
 
-    s.add_image(filename="", width="r\linewidth", placement=None)
+    s.add_image(filename="", width=r"\linewidth", placement=None)
 
     s.add_caption(caption="")
     repr(s)
